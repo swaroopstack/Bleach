@@ -1,7 +1,13 @@
-import Main from "./components/Main";
+import Hero from "./components/Hero";
+import Lore from "./components/Lore";
 
 function App() {
-  return <Main />;
+  return (
+    <>
+      <Hero />
+      <Lore />
+    </>
+  );
 }
 
 export default App;
