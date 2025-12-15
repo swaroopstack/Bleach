@@ -2,6 +2,7 @@ export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0b0b0f] text-white">
 
+
       {/* Background layer */}
       <div className="absolute inset-0">
         <img
@@ -15,9 +16,10 @@ export default function Hero() {
       <div className="absolute inset-0">
         <img
           src="/hero-energy.png"
-          alt="Energy"
-          className="w-full h-full object-cover opacity-40"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.15] mix-blend-overlay"
         />
+
       </div>
 
       {/* Ichigo Bankai */}
