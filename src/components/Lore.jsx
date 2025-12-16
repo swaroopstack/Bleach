@@ -12,18 +12,19 @@ function Lore() {
   useEffect(() => {
     gsap.fromTo(
       textRef.current,
-      { y: 80, opacity: 0 },
+      { y: 60, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
+        duration: 0.9,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
+          start: "top 75%",
         },
       }
     );
+
 
     gsap.fromTo(
       visualRef.current,

@@ -51,7 +51,7 @@ function Hero() {
       </div>
 
       {/* CHARACTER PLANE */}
-      <img src="/ichigo-bankai.png" alt="Ichigo Bankai" className="hero-ichigo absolute bottom-[-6%] left-1/2 -translate-x-1/2 w-[55vw] max-w-[900px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]" />
+      <img src="/ichigo-bankai.png" alt="Ichigo Bankai" className="hero-ichigo absolute bottom-[-6%] left-1/2 w-[55vw] max-w-[900px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]" />
 
       {/* UI PLANE */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center pointer-events-none">
