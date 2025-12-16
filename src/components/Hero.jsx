@@ -7,11 +7,14 @@ function Hero() {
     const energy = document.querySelector(".hero-energy");
     const ichigo = document.querySelector(".hero-ichigo");
 
+    // IMPORTANT: let GSAP own centering
+    gsap.set(ichigo, { xPercent: -50 });
+
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
 
-      // WORLD plane (background + smoke)
+      // World plane (background + smoke)
       gsap.to([bg, energy], {
         x: x * 18,
         y: y * 18,
@@ -19,9 +22,9 @@ function Hero() {
         ease: "power3.out",
       });
 
-      // CHARACTER plane (Ichigo)
+      // Character plane (Ichigo)
       gsap.to(ichigo, {
-        x: x * 55 + 20,
+        x: x * 40,
         y: y * 22,
         duration: 1.5,
         ease: "power3.out",
@@ -51,7 +54,11 @@ function Hero() {
       </div>
 
       {/* CHARACTER PLANE */}
-      <img src="/ichigo-bankai.png" alt="Ichigo Bankai" className="hero-ichigo absolute bottom-[-6%] left-1/2 w-[55vw] max-w-[900px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]" />
+      <img
+        src="/ichigo-bankai.png"
+        alt="Ichigo Bankai"
+        className="hero-ichigo absolute bottom-[-6%] left-1/2 w-[55vw] max-w-[900px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
+      />
 
       {/* UI PLANE */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center pointer-events-none">

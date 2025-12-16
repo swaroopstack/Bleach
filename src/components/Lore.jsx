@@ -25,19 +25,18 @@ function Lore() {
       }
     );
 
-
     gsap.fromTo(
       visualRef.current,
-      { y: 60, opacity: 0 },
+      { y: 40, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1.2,
-        delay: 0.2,
-        ease: "power3.out",
+        duration: 1,
+        delay: 0.15,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
+          start: "top 75%",
         },
       }
     );
@@ -50,7 +49,7 @@ function Lore() {
     >
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
 
-        {/* Text */}
+        {/* TEXT */}
         <div ref={textRef} className="flex flex-col justify-center">
           <h2 className="text-5xl font-bold tracking-wide">
             A WAR WRITTEN IN BLOOD
@@ -69,7 +68,7 @@ function Lore() {
           </p>
         </div>
 
-        {/* Visual */}
+        {/* VISUAL */}
         <div
           ref={visualRef}
           className="relative flex items-center justify-center"
