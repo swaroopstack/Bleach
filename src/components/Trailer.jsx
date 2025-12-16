@@ -1,29 +1,23 @@
 function Trailer() {
   return (
-    <section className="relative h-screen w-full bg-black overflow-hidden">
+    <section className="relative w-full py-32 bg-[#0a0a0c] flex justify-center">
+      
+      {/* Wide landscape wrapper */}
+      <div className="relative w-[97%] max-w-[1500px]">
 
-      {/* Video */}
-      <video
-        src="/bleach-trailer.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
 
-      {/* Dark overlay (important for readability) */}
-      <div className="absolute inset-0 bg-black/40" />
+        {/* Video card */}
+        <div className="relative aspect-[21/9] overflow-hidden rounded-[28px] bg-black shadow-[0_40px_120px_rgba(0,0,0,0.85)]">
 
-      {/* Text overlay */}
-      <div className="relative z-10 flex h-full items-center justify-center text-center text-white px-6">
-        <div>
-          <h2 className="text-5xl font-bold tracking-wide">
-            THE FINAL BATTLE BEGINS
-          </h2>
-          <p className="mt-4 text-lg text-gray-300">
-            Watch the Thousand-Year Blood War trailer
-          </p>
+          <video
+            src="/bleach-trailer.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+
         </div>
       </div>
 
