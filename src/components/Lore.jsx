@@ -1,30 +1,15 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollReveal from "./ui/ScrollReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Lore() {
   const sectionRef = useRef(null);
-  const textRef = useRef(null);
   const visualRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      textRef.current,
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-        },
-      }
-    );
-
     gsap.fromTo(
       visualRef.current,
       { y: 40, opacity: 0 },
@@ -32,7 +17,6 @@ function Lore() {
         y: 0,
         opacity: 1,
         duration: 1,
-        delay: 0.15,
         ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -50,22 +34,41 @@ function Lore() {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
 
         {/* TEXT */}
-        <div ref={textRef} className="flex flex-col justify-center">
-          <h2 className="text-5xl font-bold tracking-wide">
-            A WAR WRITTEN IN BLOOD
-          </h2>
+        <div className="flex flex-col justify-center">
 
-          <p className="mt-8 text-lg leading-relaxed text-gray-300">
+          <ScrollReveal
+            containerClassName="mb-8"
+            textClassName="lore-title text-[3.2rem] font-semibold tracking-[0.25em] uppercase text-white"
+            baseOpacity={0.4}
+            blurStrength={2}
+          >
+            A WAR WRITTEN IN BLOOD
+          </ScrollReveal>
+
+
+          <ScrollReveal
+            containerClassName="mb-6"
+            textClassName="text-lg leading-relaxed text-gray-300"
+            baseOpacity={0.1}
+            baseRotation={2}
+            blurStrength={4}
+          >
             The balance of the worlds has been shattered.
             An ancient enemy rises from the shadows,
             threatening the Soul Society itself.
-          </p>
+          </ScrollReveal>
 
-          <p className="mt-6 text-lg leading-relaxed text-gray-400">
+          <ScrollReveal
+            textClassName="text-lg leading-relaxed text-gray-400"
+            baseOpacity={0.15}
+            baseRotation={2}
+            blurStrength={3}
+          >
             Ichigo Kurosaki is drawn once more into battle —
             where power alone is not enough, and every strike
             carries the weight of fate.
-          </p>
+          </ScrollReveal>
+
         </div>
 
         {/* VISUAL */}
