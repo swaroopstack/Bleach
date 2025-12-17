@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollReveal from "./ui/ScrollReveal";
+import HoverCard from "./ui/HoverCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,9 +77,11 @@ function Lore() {
           ref={visualRef}
           className="relative flex items-center justify-center"
         >
-          <div className="w-full h-[420px] bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-gray-500">
-            Visual / Artwork
-          </div>
+          <HoverCard
+            coverImage="/lore/ichigo-cover.png"
+            characterImage="/lore/ichigo-character.png"
+            logoImage="/lore/bleach-logo.png"
+          />
         </div>
 
       </div>

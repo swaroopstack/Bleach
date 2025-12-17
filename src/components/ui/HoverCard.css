@@ -1,0 +1,107 @@
+.hover-card {
+  width: 300px;
+  height: 455px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 36px;
+  perspective: 2500px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.hover-card-wrapper {
+  transition: all 0.5s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #000;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+              rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.hover-card-wrapper::before,
+.hover-card-wrapper::after {
+  content: "";
+  opacity: 0;
+  width: 100%;
+  transition: all 0.5s;
+  border-radius: 30px;
+  position: absolute;
+  left: 0;
+}
+
+.hover-card-wrapper::before {
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.hover-card-wrapper::after {
+  bottom: 0;
+  height: 80px;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.hover-card:hover .hover-card-wrapper {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.hover-card:hover .hover-card-wrapper::before,
+.hover-card:hover .hover-card-wrapper::after {
+  opacity: 1;
+}
+
+.hover-card:hover .hover-card-wrapper::after {
+  height: 120px;
+}
+
+.hover-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.hover-card:hover .hover-cover-image {
+  opacity: 0.3;
+}
+
+.hover-logo {
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+  transition: transform 0.5s;
+}
+
+.hover-card:hover .hover-logo {
+  transform: translate3d(0%, -50px, 100px);
+}
+
+.hover-character {
+  width: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  filter: drop-shadow(2px 2px 2px #000);
+  position: absolute;
+  z-index: -1;
+}
+
+.hover-card:hover .hover-character {
+  opacity: 1;
+  transform: translate3d(5%, -20%, 670px);
+}
