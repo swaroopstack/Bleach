@@ -9,8 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 function Lore() {
   const sectionRef = useRef(null);
   const visualRef = useRef(null);
+  const titleRef = useRef(null);
 
   useEffect(() => {
+    // Visual card entry
     gsap.fromTo(
       visualRef.current,
       { y: 40, opacity: 0 },
@@ -25,6 +27,22 @@ function Lore() {
         },
       }
     );
+
+    // Title entry (slow, authoritative)
+    gsap.fromTo(
+      titleRef.current,
+      { y: 20, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 85%",
+        },
+      }
+    );
   }, []);
 
   return (
@@ -32,21 +50,53 @@ function Lore() {
       ref={sectionRef}
       className="relative min-h-[120vh] w-full bg-[#0b0b0f] text-white flex items-center"
     >
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
+      {/* subtle atmosphere */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
+
+      <div className="relative max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
 
         {/* TEXT */}
         <div className="flex flex-col justify-center">
 
-          <ScrollReveal
-            containerClassName="mb-8"
-            textClassName="lore-title text-[3.2rem] font-semibold tracking-[0.25em] uppercase text-white"
-            baseOpacity={0.4}
-            blurStrength={2}
+          {/* TITLE — TRUE ONE-LINE TITLE */}
+          <div
+            ref={titleRef}
+            className="
+              mb-10
+              flex
+              flex-wrap
+              items-baseline
+              gap-x-4
+              uppercase
+              leading-none
+              select-none
+            "
           >
-            A WAR WRITTEN IN BLOOD
-          </ScrollReveal>
+            <span
+              className="
+                text-[clamp(2.6rem,4.5vw,3.6rem)]
+                font-semibold
+                tracking-[0.32em]
+                text-white/90
+              "
+            >
+              A WAR WRITTEN IN
+            </span>
 
+            <span
+              className="
+                text-[clamp(2.6rem,4.5vw,3.6rem)]
+                font-extrabold
+                tracking-[0.22em]
+                text-[#b11212]
+                drop-shadow-[0_0_28px_rgba(177,18,18,0.25)]
+              "
+            >
+              BLOOD
+            </span>
+          </div>
 
+          {/* BODY */}
           <ScrollReveal
             containerClassName="mb-6"
             textClassName="text-lg leading-relaxed text-gray-300"

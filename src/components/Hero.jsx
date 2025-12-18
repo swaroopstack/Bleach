@@ -7,14 +7,14 @@ function Hero() {
     const energy = document.querySelector(".hero-energy");
     const ichigo = document.querySelector(".hero-ichigo");
 
-    // IMPORTANT: let GSAP own centering
+    // GSAP owns centering
     gsap.set(ichigo, { xPercent: -50 });
 
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
 
-      // World plane (background + smoke)
+      // World plane
       gsap.to([bg, energy], {
         x: x * 18,
         y: y * 18,
@@ -22,7 +22,7 @@ function Hero() {
         ease: "power3.out",
       });
 
-      // Character plane (Ichigo)
+      // Character plane
       gsap.to(ichigo, {
         x: x * 40,
         y: y * 22,
@@ -58,6 +58,16 @@ function Hero() {
         src="/ichigo-bankai.png"
         alt="Ichigo Bankai"
         className="hero-ichigo absolute bottom-[-6%] left-1/2 w-[55vw] max-w-[900px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
+      />
+
+      {/* 🔥 HERO BOTTOM FADE (THIS IS THE FIX) */}
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 w-full z-[5]"
+        style={{
+          height: "30vh",
+          background:
+            "linear-gradient(to bottom, rgba(11,11,15,0) 0%, rgba(11,11,15,0.6) 45%, rgba(11,11,15,1) 100%)",
+        }}
       />
 
       {/* UI PLANE */}

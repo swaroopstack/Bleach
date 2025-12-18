@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <Hero />
+      
       <Lore />
       <Trailer />
       <Watch />
