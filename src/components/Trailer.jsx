@@ -19,8 +19,6 @@ function Trailer() {
       {
         root: null,
 
-        // 🔥 STARTS EARLIER (just after Lore)
-        // smaller negative top margin = earlier trigger
         rootMargin: "-10% 0px -30% 0px",
 
         threshold: 0,
