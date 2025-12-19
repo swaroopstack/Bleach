@@ -18,9 +18,11 @@ function Trailer() {
       },
       {
         root: null,
-        // 🔥 KEY LINE:
-        // video starts only AFTER user scrolls a bit into the section
-        rootMargin: "-25% 0px -25% 0px",
+
+        // 🔥 STARTS EARLIER (just after Lore)
+        // smaller negative top margin = earlier trigger
+        rootMargin: "-10% 0px -30% 0px",
+
         threshold: 0,
       }
     );
@@ -37,8 +39,9 @@ function Trailer() {
     >
       <div className="relative w-[97%] max-w-[1500px]">
 
+        {/* Video card */}
         <div className="relative aspect-[21/9] overflow-hidden rounded-[28px] bg-black shadow-[0_40px_120px_rgba(0,0,0,0.85)]">
-
+          
           <video
             ref={videoRef}
             src="/bleach-trailer.mp4"
@@ -48,7 +51,7 @@ function Trailer() {
             className="w-full h-full object-cover"
           />
 
-          {/* Subtle internal fade */}
+          {/* Subtle internal bottom fade */}
           <div
             className="pointer-events-none absolute inset-x-0 bottom-0"
             style={{
@@ -58,6 +61,7 @@ function Trailer() {
             }}
           />
         </div>
+
       </div>
     </section>
   );
