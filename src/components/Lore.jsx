@@ -28,7 +28,7 @@ function Lore() {
       }
     );
 
-    // Title entry (slow, authoritative)
+    // Title entry
     gsap.fromTo(
       titleRef.current,
       { y: 20, opacity: 0 },
@@ -50,15 +50,21 @@ function Lore() {
       ref={sectionRef}
       className="relative min-h-[120vh] w-full bg-[#0b0b0f] text-white flex items-center"
     >
-      {/* subtle atmosphere */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
+      {/* subtle atmosphere — SAME BLACK FAMILY */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(11,11,15,0) 0%, rgba(11,11,15,0.2) 55%, rgba(11,11,15,0.45) 100%)",
+        }}
+      />
 
       <div className="relative max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
 
         {/* TEXT */}
         <div className="flex flex-col justify-center">
 
-          {/* TITLE — TRUE ONE-LINE TITLE */}
+          {/* TITLE */}
           <div
             ref={titleRef}
             className="

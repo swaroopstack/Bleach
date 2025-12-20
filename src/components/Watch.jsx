@@ -57,7 +57,7 @@ export default function Watch() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[80vh] bg-black flex items-center overflow-hidden"
+      className="relative w-full h-[80vh] bg-[#0b0b0f] flex items-center overflow-hidden"
     >
       <div className="w-full max-w-7xl mx-auto px-12 grid grid-cols-2 gap-20 items-center">
 

@@ -30,7 +30,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-black text-white">
+    <footer ref={footerRef} className="bg-[#0b0b0f] text-white">
       {/* SCROLL-AWARE SEPARATOR */}
       <div className="relative w-full h-[1.5px] overflow-hidden">
         <span
