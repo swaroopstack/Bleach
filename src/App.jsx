@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Intro from "./components/Intro";
+import IntroCinematic from "./components/IntroCinematic";
 import Hero from "./components/Hero";
 import Lore from "./components/Lore";
 import Trailer from "./components/Trailer";
@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       {showIntro ? (
-        <Intro onFinish={() => setShowIntro(false)} />
+        <IntroCinematic onFinish={() => setShowIntro(false)} />
       ) : (
         <>
           <Hero />
