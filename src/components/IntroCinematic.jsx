@@ -6,86 +6,93 @@ gsap.registerPlugin(ScrollTrigger);
 
 function IntroCinematic({ onFinish }) {
   const sectionRef = useRef(null);
-  const bankaiPlayed = useRef(false);
-  const tensaPlayed = useRef(false);
-
-  const bankaiAudio = useRef(null);
-  const tensaAudio = useRef(null);
+  const playedBankai = useRef(false);
+  const playedTensa = useRef(false);
 
   useEffect(() => {
-    bankaiAudio.current = new Audio("/audio/bankai.mp3");
-    tensaAudio.current = new Audio("/audio/tensa-zangetsu.mp3");
-
-    bankaiAudio.current.volume = 1;
-    tensaAudio.current.volume = 1;
+    const bankai = new Audio("/audio/bankai.mp3");
+    const tensa = new Audio("/audio/tensa-zangetsu.mp3");
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=220%",
+        end: "+=260%",
         scrub: true,
         pin: true,
       },
+      onComplete: () => {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+        onFinish();
+      },
     });
 
-    /* SKY → LOGO → ICHIGO */
+    /* SKY – INITIAL STILLNESS */
     tl.fromTo(
       ".intro-sky",
-      { opacity: 1 },
-      { opacity: 1, duration: 1 }
-    )
-      .fromTo(
-        ".intro-logo",
-        { opacity: 0 },
-        { opacity: 1, duration: 0.6 },
-        "+=0.2"
-      )
-      .to(".intro-logo", { opacity: 0, duration: 0.4 }, "+=0.4")
-      .fromTo(
-        ".intro-ichigo",
-        { opacity: 0, scale: 0.96 },
-        { opacity: 1, scale: 1, duration: 1 },
-        "<"
-      );
+      { scale: 1 },
+      { scale: 1.08, duration: 3, ease: "none" }
+    );
 
-    /* BANKAI MOMENT */
+    /* LOGO IN → OUT (WHILE CAMERA MOVES) */
+    tl.fromTo(
+      ".intro-logo",
+      { opacity: 0, scale: 1 },
+      { opacity: 1, scale: 1, duration: 0.8 },
+      0.2
+    );
+    tl.to(".intro-logo", { opacity: 0, scale: 0.92, duration: 0.8 }, 1);
+
+    /* LAND RISES INTO FRAME */
+    tl.fromTo(
+      ".intro-land",
+      { yPercent: 30 },
+      { yPercent: 0, duration: 2, ease: "none" },
+      0.8
+    );
+
+    /* ICHIGO ALREADY PRESENT (SUBTLE PRESENCE) */
+    tl.fromTo(
+      ".intro-ichigo",
+      { opacity: 0.85 },
+      { opacity: 1, duration: 1 },
+      1.2
+    );
+
+    /* BANKAI VOICE */
     tl.add(() => {
-      if (!bankaiPlayed.current) {
-        bankaiAudio.current.play().catch(() => {});
-        bankaiPlayed.current = true;
+      if (!playedBankai.current) {
+        bankai.play().catch(() => {});
+        playedBankai.current = true;
       }
-    });
+    }, 1.9);
 
-    tl.to(".intro-dark", { opacity: 1, duration: 0.8 }, "+=0.2");
+    /* BLACK RISE FROM BOTTOM */
+    tl.fromTo(
+      ".intro-black",
+      { scaleY: 0, transformOrigin: "bottom" },
+      { scaleY: 1, duration: 1.2, ease: "power2.inOut" },
+      2.1
+    );
 
     /* TENSA ZANGETSU */
     tl.add(() => {
-      if (!tensaPlayed.current) {
-        tensaAudio.current.play().catch(() => {});
-        tensaPlayed.current = true;
+      if (!playedTensa.current) {
+        tensa.play().catch(() => {});
+        playedTensa.current = true;
       }
-    });
+    }, 2.6);
 
-    /* HANDOFF */
-    tl.to(".intro-wrapper", { opacity: 0, duration: 0.6 }, "+=0.4");
+    /* FADE INTRO OUT */
+    tl.to(".intro-wrapper", { opacity: 0, duration: 0.6 }, 3);
 
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "bottom bottom",
-      once: true,
-      onEnter: onFinish,
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, [onFinish]);
 
   return (
     <section
       ref={sectionRef}
-      className="intro-wrapper relative h-screen w-full overflow-hidden bg-white"
+      className="intro-wrapper relative h-screen w-full overflow-hidden bg-[#0b0b0f]"
     >
       {/* SKY */}
       <img
@@ -97,18 +104,18 @@ function IntroCinematic({ onFinish }) {
       {/* LAND */}
       <img
         src="/intro/land.png"
-        className="absolute bottom-0 w-full object-cover"
+        className="intro-land absolute bottom-0 w-full object-cover"
         alt=""
       />
 
-      {/* ICHIGO */}
+      {/* ICHIGO (ALREADY THERE) */}
       <img
-        src="/intro/ichigo-base.png"
-        className="intro-ichigo absolute bottom-0 left-1/2 -translate-x-1/2 w-[420px] opacity-0"
+        src="/intro/ichigo-intro.png"
+        className="intro-ichigo absolute bottom-0 left-1/2 -translate-x-1/2 w-[420px]"
         alt=""
       />
 
-      {/* DUST */}
+      {/* DUST / PRESSURE */}
       <video
         src="/intro/pressure-dust.mp4"
         autoPlay
@@ -121,12 +128,12 @@ function IntroCinematic({ onFinish }) {
       {/* LOGO */}
       <img
         src="/intro/bleach-logo.png"
-        className="intro-logo absolute top-1/3 left-1/2 -translate-x-1/2 opacity-0 w-[320px]"
+        className="intro-logo absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] opacity-0"
         alt=""
       />
 
-      {/* DARK TAKEOVER */}
-      <div className="intro-dark absolute inset-0 bg-[#0b0b0f] opacity-0" />
+      {/* BLACK TAKEOVER */}
+      <div className="intro-black absolute inset-0 bg-[#0b0b0f] scale-y-0" />
     </section>
   );
 }
