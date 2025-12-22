@@ -13,6 +13,7 @@ function IntroCinematic() {
     gsap.set(".intro-logo", {
       opacity: 0,
       scale: 1.4,
+      y: 0,
     });
 
     // LOGO FADE IN (EARLY)
@@ -41,11 +42,12 @@ function IntroCinematic() {
       ease: "none",
     });
 
-    // LOGO SCALES DOWN (NO FADE)
+    // LOGO MOVES DOWN + SCALES DOWN (DEPTH FEEL)
     tl.to(
       ".intro-logo",
       {
         scale: 0.65,
+        y: 180,          // 👈 pushes logo toward bottom
         duration: 3,
         ease: "none",
       },
@@ -69,7 +71,7 @@ function IntroCinematic() {
         alt=""
       />
 
-      {/* LOGO — BIG → SMALL */}
+      {/* LOGO — BIG → SMALL + DOWN */}
       <img
         src="/intro/bleach-logo.png"
         className="intro-logo absolute top-1/3 left-1/2 -translate-x-1/2 w-[520px]"
