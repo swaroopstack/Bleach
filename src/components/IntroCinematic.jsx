@@ -25,10 +25,10 @@ export default function IntroCinematic() {
       transformOrigin: 'center center',
     });
 
-    // Land starts COMPLETELY HIDDEN - positioned way below viewport
+    // Land starts HIDDEN - pushed down AND zoomed in
     gsap.set(land, {
       y: '100vh',
-      scale: 1,
+      scale: 2.5,
       transformOrigin: 'bottom center',
     });
 
@@ -57,7 +57,7 @@ export default function IntroCinematic() {
       // Sky zooms out
       tl.to(sky, {
         scale: 1,
-        duration: 2,
+        duration: 2.5,
       }, 0);
 
       // Logo zooms out WITH sky AND fades out
@@ -68,12 +68,14 @@ export default function IntroCinematic() {
         ease: 'power2.inOut',
       }, 0);
 
-      // Land slides UP into frame (dolly zoom reveal)
+      // Land slides UP + zooms OUT - times to finish WITH sky
       tl.to(land, {
         y: 0,
+        scale: 1,
         duration: 1.8,
         ease: 'power2.out',
-      }, 0.8);
+      }, 0.7); // Starts at 0.7s, runs for 1.8s = ends at 2.5s (same as sky)
+
     });
 
     return () => {
@@ -105,7 +107,7 @@ export default function IntroCinematic() {
             />
           </div>
 
-          {/* LAND - z-30 (front layer, starts hidden below viewport) */}
+          {/* LAND - z-30 (front layer, slides UP + zooms OUT) */}
           <div
             ref={landRef}
             className="
