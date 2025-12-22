@@ -8,18 +8,19 @@ function IntroCinematic() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // INITIAL STATES (BEFORE SCROLL)
-    gsap.set(".intro-sky", { scale: 1.6 });
-    gsap.set(".intro-logo", { opacity: 0 });
-    gsap.set(".intro-land", { yPercent: 50 });
-    gsap.set(".intro-ichigo", { opacity: 0 });
+    // INITIAL STATE
+    gsap.set(".intro-sky", { scale: 1.75 });
+    gsap.set(".intro-logo", {
+      opacity: 0,
+      scale: 1.4,
+    });
 
-    // LOGO FADE IN ON LOAD (NOT SCROLL-DEPENDENT)
+    // LOGO FADE IN (EARLY)
     gsap.to(".intro-logo", {
       opacity: 1,
-      duration: 1.2,
-      ease: "power2.out",
+      duration: 0.6,
       delay: 0.2,
+      ease: "power2.out",
     });
 
     // SCROLL-DRIVEN CAMERA ZOOM-OUT
@@ -27,50 +28,28 @@ function IntroCinematic() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=300%", // LONG SCROLL = SLOW ZOOM
+        end: "+=220%",
         scrub: true,
         pin: true,
       },
     });
 
-    // SKY ZOOMS OUT SLOWLY
+    // SKY ZOOMS OUT
     tl.to(".intro-sky", {
       scale: 1,
       duration: 3,
       ease: "none",
     });
 
-    // LOGO FADES OUT WHILE SCROLLING
+    // LOGO SCALES DOWN (NO FADE)
     tl.to(
       ".intro-logo",
       {
-        opacity: 0,
-        duration: 1,
-        ease: "none",
-      },
-      0.3
-    );
-
-    // LAND COMES UP DURING ZOOM-OUT
-    tl.to(
-      ".intro-land",
-      {
-        yPercent: 0,
+        scale: 0.65,
         duration: 3,
         ease: "none",
       },
       0
-    );
-
-    // ICHIGO APPEARS LATE IN THE ZOOM-OUT
-    tl.to(
-      ".intro-ichigo",
-      {
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out",
-      },
-      1.5
     );
 
     return () => {
@@ -83,31 +62,17 @@ function IntroCinematic() {
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-[#0b0b0f]"
     >
-      {/* SKY — STARTS HEAVILY ZOOMED */}
+      {/* SKY */}
       <img
         src="/intro/sky.jpg"
         className="intro-sky absolute inset-0 w-full h-full object-cover"
         alt=""
       />
 
-      {/* LOGO — AUTO FADE IN */}
+      {/* LOGO — BIG → SMALL */}
       <img
         src="/intro/bleach-logo.png"
-        className="intro-logo absolute top-1/3 left-1/2 -translate-x-1/2 w-[440px]"
-        alt=""
-      />
-
-      {/* LAND */}
-      <img
-        src="/intro/land.png"
-        className="intro-land absolute bottom-0 w-full object-cover"
-        alt=""
-      />
-
-      {/* ICHIGO — REVEALED BY ZOOM-OUT */}
-      <img
-        src="/intro/ichigo-base.png"
-        className="intro-ichigo absolute bottom-0 left-1/2 -translate-x-1/2 w-[420px]"
+        className="intro-logo absolute top-1/3 left-1/2 -translate-x-1/2 w-[520px]"
         alt=""
       />
     </section>
