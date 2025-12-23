@@ -53,14 +53,23 @@ function Hero() {
         />
       </div>
 
-      {/* CHARACTER PLANE */}
+      {/* CHARACTER PLANE — NOW IN FRONT */}
       <img
         src="/ichigo-bankai.png"
         alt="Ichigo Bankai"
-        className="hero-ichigo absolute bottom-[-6%] left-1/2 w-[55vw] max-w-[900px] drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
+        className="
+          hero-ichigo
+          absolute
+          bottom-[-6%]
+          left-1/2
+          w-[55vw]
+          max-w-[900px]
+          z-[20]
+          drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]
+        "
       />
 
-      {/* 🔥 HERO BOTTOM FADE (THIS IS THE FIX) */}
+      {/* HERO BOTTOM FADE */}
       <div
         className="pointer-events-none absolute bottom-0 left-0 w-full z-[5]"
         style={{
@@ -75,10 +84,6 @@ function Hero() {
         <h1 className="text-7xl font-extrabold tracking-[0.4em]">
           BLEACH
         </h1>
-
-        <p className="mt-4 text-xl text-gray-300 tracking-widest">
-          THOUSAND-YEAR BLOOD WAR
-        </p>
 
         <div className="absolute bottom-10 flex items-center gap-2 opacity-70">
           <span className="text-sm uppercase tracking-widest">
