@@ -11,15 +11,12 @@ export default function IntroCinematic({ onFinish }) {
   const vignetteRef = useRef(null);
   const glowRef = useRef(null);
 
-  const bankaiAudioRef = useRef(null);
-  const zangetsuAudioRef = useRef(null);
-
   useEffect(() => {
     const tl = gsap.timeline({
       defaults: { ease: "power2.inOut" },
     });
 
-    // ================= INITIAL STATES =================
+    // INITIAL STATES
     gsap.set(skyRef.current, { scale: 3.5 });
     gsap.set(landRef.current, { y: "100vh", scale: 2.5 });
     gsap.set(logoRef.current, { opacity: 0, scale: 1.2 });
@@ -35,10 +32,10 @@ export default function IntroCinematic({ onFinish }) {
       { opacity: 0 }
     );
 
-    // ================= LOGO =================
+    // LOGO
     tl.to(logoRef.current, { opacity: 1, duration: 1 }, 0.3);
 
-    // ================= CAMERA / WORLD =================
+    // CAMERA / WORLD
     tl.to(skyRef.current, { scale: 1, duration: 2.5 }, 1.4);
     tl.to(
       logoRef.current,
@@ -48,14 +45,7 @@ export default function IntroCinematic({ onFinish }) {
     tl.to(landRef.current, { y: 0, scale: 1, duration: 1.9 }, 2.1);
     tl.to(ichigoRef.current, { opacity: 1, duration: 2 }, 2.5);
 
-    // ================= BANKAI (JUST BEFORE DARK) =================
-    tl.add(() => {
-      const bankai = bankaiAudioRef.current;
-      bankai.currentTime = 0;
-      bankai.play().catch(() => {});
-    }, 3.9); // 👈 BEFORE darkness
-
-    // ================= DARK THEME =================
+    // DARK THEME
     tl.to(dustRef.current, { opacity: 0.45, duration: 1.2 }, 4.1);
     tl.to(
       darkCoreRef.current,
@@ -65,19 +55,8 @@ export default function IntroCinematic({ onFinish }) {
     tl.to(vignetteRef.current, { opacity: 1, duration: 1.8 }, 4.4);
     tl.to(glowRef.current, { opacity: 0.25, duration: 2 }, 4.7);
 
-    // ================= HANDOFF TO APP =================
-    tl.add(() => {
-      // Start Tensa Zangetsu EXACTLY when Hero will fade in
-      const tz = zangetsuAudioRef.current;
-      tz.volume = 0;
-      tz.currentTime = 0;
-      tz.play().catch(() => {});
-      gsap.to(tz, { volume: 1, duration: 2 });
-
-      // Tell App.jsx to show Hero + rest
-      onFinish();
-    }, 6.8);
-
+    // HANDOFF
+    tl.add(onFinish, 6.8);
   }, [onFinish]);
 
   return (
@@ -89,11 +68,17 @@ export default function IntroCinematic({ onFinish }) {
 
       {/* LAND */}
       <div ref={landRef} className="absolute bottom-0 w-full h-[50vh]">
-        <img src="/intro/land.png" className="w-full h-full object-cover object-top" />
+        <img
+          src="/intro/land.png"
+          className="w-full h-full object-cover object-top"
+        />
       </div>
 
       {/* ICHIGO */}
-      <div ref={ichigoRef} className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px]">
+      <div
+        ref={ichigoRef}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px]"
+      >
         <img src="/intro/ichigo_base.png" className="w-full" />
       </div>
 
@@ -109,8 +94,14 @@ export default function IntroCinematic({ onFinish }) {
 
       {/* DARK THEME */}
       <div ref={darkCoreRef} className="absolute inset-0 bg-black" />
-      <div ref={vignetteRef} className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,black_100%)]" />
-      <div ref={glowRef} className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08),transparent_60%)]" />
+      <div
+        ref={vignetteRef}
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,black_100%)]"
+      />
+      <div
+        ref={glowRef}
+        className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08),transparent_60%)]"
+      />
 
       {/* LOGO */}
       <img
@@ -118,10 +109,6 @@ export default function IntroCinematic({ onFinish }) {
         src="/intro/bleach-logo.png"
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[520px]"
       />
-
-      {/* AUDIO */}
-      <audio ref={bankaiAudioRef} src="/audio/bankai.mp3" />
-      <audio ref={zangetsuAudioRef} src="/audio/tensa-zangetsu.mp3" />
     </div>
   );
 }
