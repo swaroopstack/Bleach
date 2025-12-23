@@ -10,14 +10,16 @@ export default function IntroCinematic() {
   const skyRef = useRef(null);
   const landRef = useRef(null);
   const logoRef = useRef(null);
+  const ichigoRef = useRef(null);
 
   useEffect(() => {
     const camera = cameraRef.current;
     const sky = skyRef.current;
     const land = landRef.current;
     const logo = logoRef.current;
+    const ichigo = ichigoRef.current;
 
-    if (!camera || !sky || !land || !logo) return;
+    if (!camera || !sky || !land || !logo || !ichigo) return;
 
     // Initial state: sky zoomed in
     gsap.set(sky, {
@@ -25,18 +27,23 @@ export default function IntroCinematic() {
       transformOrigin: 'center center',
     });
 
-    // Land starts HIDDEN - pushed down AND zoomed in
+    // Land starts hidden
     gsap.set(land, {
       y: '100vh',
       scale: 2.5,
       transformOrigin: 'bottom center',
     });
 
-    // Logo initial state (hidden)
+    // Logo initial state
     gsap.set(logo, {
       scale: 1.2,
       opacity: 0,
       y: 0,
+    });
+
+    // Ichigo initial state
+    gsap.set(ichigo, {
+      opacity: 0,
     });
 
     // Step 1: Logo fades in
@@ -47,9 +54,8 @@ export default function IntroCinematic() {
       ease: 'power2.out',
     });
 
-    // Step 2: After logo appears, AUTO ANIMATION happens
+    // Step 2: Auto cinematic sequence
     logoFadeIn.then(() => {
-      // Create the main animation timeline
       const tl = gsap.timeline({
         defaults: { ease: 'power2.inOut' }
       });
@@ -60,28 +66,34 @@ export default function IntroCinematic() {
         duration: 2.5,
       }, 0);
 
-      // Logo zooms out at SAME speed as sky, slowly fades
+      // Logo scales with sky
       tl.to(logo, {
-        scale: 0.34, // 1.2 → 0.34 matches sky's 3.5 → 1 ratio
+        scale: 0.34,
         duration: 2.5,
         ease: 'power2.inOut',
       }, 0);
 
-      // Logo fades out slowly
+      // Logo fades out
       tl.to(logo, {
         opacity: 0,
         duration: 2.5,
         ease: 'power1.inOut',
       }, 0);
 
-      // Land slides UP + zooms OUT - times to finish WITH sky
+      // Ichigo fades in (SLIGHTLY LATER)
+      tl.to(ichigo, {
+        opacity: 1,
+        duration: 2,
+        ease: 'power1.inOut',
+      }, 1.4); // 👈 delayed a bit more
+
+      // Land rises + zooms out
       tl.to(land, {
         y: 0,
         scale: 1,
         duration: 1.8,
         ease: 'power2.out',
-      }, 0.7); // Starts at 0.7s, runs for 1.8s = ends at 2.5s (same as sky)
-
+      }, 0.7);
     });
 
     return () => {
@@ -91,7 +103,7 @@ export default function IntroCinematic() {
 
   return (
     <div className="relative w-full">
-      {/* CAMERA VIEWPORT */}
+      {/* CAMERA */}
       <div
         ref={cameraRef}
         className="relative w-full h-screen overflow-hidden bg-[#0b0b0f]"
@@ -101,7 +113,7 @@ export default function IntroCinematic() {
           ref={worldRef}
           className="absolute inset-0 w-full h-full"
         >
-          {/* SKY - z-10 (back layer) */}
+          {/* SKY */}
           <div
             ref={skyRef}
             className="absolute inset-0 w-full h-full z-10"
@@ -113,7 +125,7 @@ export default function IntroCinematic() {
             />
           </div>
 
-          {/* LAND - z-30 (front layer, slides UP + zooms OUT) */}
+          {/* LAND */}
           <div
             ref={landRef}
             className="
@@ -122,7 +134,7 @@ export default function IntroCinematic() {
               left-0
               w-full
               h-[50vh]
-              z-30
+              z-20
               pointer-events-none
             "
           >
@@ -132,10 +144,30 @@ export default function IntroCinematic() {
               className="w-full h-full object-cover object-top"
             />
           </div>
+
+          {/* ICHIGO */}
+          <div
+            ref={ichigoRef}
+            className="
+              absolute
+              bottom-0
+              left-1/2
+              -translate-x-1/2
+              w-[280px]
+              z-40
+              pointer-events-none
+            "
+          >
+            <img
+              src="/intro/ichigo-base.png"
+              alt="Ichigo"
+              className="w-full h-auto object-contain"
+            />
+          </div>
         </div>
       </div>
 
-      {/* LOGO - z-50 (middle layer, zooms out with sky and fades) */}
+      {/* LOGO */}
       <img
         ref={logoRef}
         src="/intro/bleach-logo.png"
