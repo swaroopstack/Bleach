@@ -60,12 +60,18 @@ export default function IntroCinematic() {
         duration: 2.5,
       }, 0);
 
-      // Logo zooms out WITH sky AND fades out
+      // Logo zooms out at SAME speed as sky, slowly fades
       tl.to(logo, {
-        scale: 0.4,
-        opacity: 0,
-        duration: 1.5,
+        scale: 0.34, // 1.2 → 0.34 matches sky's 3.5 → 1 ratio
+        duration: 2.5,
         ease: 'power2.inOut',
+      }, 0);
+
+      // Logo fades out slowly
+      tl.to(logo, {
+        opacity: 0,
+        duration: 2.5,
+        ease: 'power1.inOut',
       }, 0);
 
       // Land slides UP + zooms OUT - times to finish WITH sky
