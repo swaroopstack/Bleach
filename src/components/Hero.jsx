@@ -39,7 +39,7 @@ function Hero() {
     <section className="relative h-screen w-full overflow-hidden bg-[#0b0b0f] text-white">
 
       {/* WORLD PLANE */}
-      <div className="absolute inset-0 scale-105">
+      <div className="absolute inset-0 scale-105 z-0">
         <img
           src="/hero-bg.png"
           alt=""
@@ -53,7 +53,27 @@ function Hero() {
         />
       </div>
 
-      {/* CHARACTER PLANE — NOW IN FRONT */}
+      {/* BLEACH TEXT — BETWEEN BG AND ICHIGO */}
+      <h1
+        className="
+          absolute
+          inset-0
+          flex
+          items-center
+          justify-center
+          text-7xl
+          font-extrabold
+          tracking-[0.4em]
+          translate-x-[25px]
+          z-[1]
+          pointer-events-none
+          select-none
+        "
+      >
+        BLEACH
+      </h1>
+
+      {/* CHARACTER PLANE */}
       <img
         src="/ichigo-bankai.png"
         alt="Ichigo Bankai"
@@ -64,7 +84,7 @@ function Hero() {
           left-1/2
           w-[55vw]
           max-w-[900px]
-          z-[20]
+          z-[2]
           drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]
         "
       />
@@ -79,16 +99,10 @@ function Hero() {
         }}
       />
 
-      {/* UI PLANE */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center pointer-events-none">
-        <h1 className="text-7xl font-extrabold tracking-[0.4em]">
-          BLEACH
-        </h1>
-
-        <div className="absolute bottom-10 flex items-center gap-2 opacity-70">
-          <span className="text-sm uppercase tracking-widest">
-            Scroll
-          </span>
+      {/* UI PLANE — SCROLL ONLY */}
+      <div className="relative z-10 flex h-full items-end justify-center pb-10 pointer-events-none">
+        <div className="flex items-center gap-2 opacity-70">
+          <span className="text-sm uppercase tracking-widest">Scroll</span>
           <span className="animate-bounce">↓</span>
         </div>
       </div>
