@@ -7,11 +7,20 @@ import Lore from "./components/Lore";
 import Trailer from "./components/Trailer";
 import Watch from "./components/Watch";
 import Footer from "./components/Footer";
+import VolumeToggle from "./components/VolumeToggle";
+
+import { initMAIN } from "./audio/audioManager";
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
   const mainRef = useRef(null);
 
+  // 🔊 start audio ONCE (muted)
+  useEffect(() => {
+    initMAIN();
+  }, []);
+
+  // visuals ONLY
   useEffect(() => {
     if (!showIntro) {
       gsap.fromTo(
@@ -35,6 +44,9 @@ function App() {
           <Footer />
         </div>
       )}
+
+      {/* 🔘 isolated toggle */}
+      <VolumeToggle />
     </>
   );
 }
