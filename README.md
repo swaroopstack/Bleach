@@ -1,16 +1,111 @@
-# React + Vite
+# Bleach Cinematic Website ⚔️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A cinematic, animation-heavy fan website inspired by *Bleach*, built to experiment with advanced frontend concepts like timeline-based animations, audio control under browser restrictions, and immersive UI transitions.
 
-Currently, two official plugins are available:
+This project focuses on **experience over content** — creating a dramatic, anime-style intro flow similar to opening cinematics rather than a typical static website.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🔍 Project Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fully animated intro sequence with cinematic transitions  
+- Scroll-based and timeline-based animations  
+- Controlled background music and trailer playback  
+- Responsive layout with desktop-first cinematic intent  
+- Deployed as a live production build
 
-## Expanding the ESLint configuration
+The goal was **not** to clone an existing Bleach site, but to explore how far modern frontend tools can go in delivering a story-like web experience.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** React (Vite)
+- **Styling:** CSS
+- **Animations:** GSAP (timelines + ScrollTrigger)
+- **Audio / Video:** HTML5 Media APIs
+- **Build Tool:** Vite
+- **Deployment:** Static hosting (production build)
+
+---
+
+## 🎬 Key Features
+
+- **Cinematic Intro**
+  - Multi-layer GSAP timeline
+  - Controlled reveal of background, land, logo, and effects
+- **Audio Handling**
+  - User-interaction–based audio start (browser-compliant)
+  - Manual volume toggle
+  - One-shot cinematic audio + background music separation
+- **Trailer Section**
+  - Large media asset handling
+  - Lazy loading considerations
+- **Smooth Transitions**
+  - Fade-in of main site after intro
+  - Scroll-triggered animations for sections
+
+---
+
+## ⚠️ Challenges Faced (and Solved)
+
+- **Browser autoplay restrictions**
+  - Audio only starts after explicit user interaction
+- **Heavy media assets**
+  - MP4 loading delays required design compromises
+- **State & ref coordination**
+  - Managing audio, animation, and UI state together
+- **Animation timing**
+  - Preventing desync between visuals and sound
+
+These challenges forced a deeper understanding of **how browsers actually behave**, not just how code “should” work.
+
+---
+
+## 📱 Responsiveness & Limitations
+
+- Designed primarily for **desktop cinematic viewing**
+- Works on mobile, but:
+  - Some animations are intentionally simplified
+  - Performance depends on device capability
+- Safari/iOS autoplay limitations are handled, not bypassed
+
+---
+
+## 🚀 Deployment
+
+The project is deployed and accessible publicly.  
+Built using a production Vite build and hosted as a static site.
+
+---
+
+## 🧠 What This Project Demonstrates
+
+- Practical React component structuring
+- Advanced GSAP timeline usage
+- Real-world audio/video constraints
+- Debugging animation-heavy UI under pressure
+- Completing and deploying a complex idea end-to-end
+
+---
+
+## 🔮 Future Improvements
+
+- Media optimization (video compression, better loading strategy)
+- Cleaner animation abstraction
+- Improved mobile performance
+- Codebase refactor for better readability and scalability
+
+---
+
+## 📌 Disclaimer
+
+This is a **fan-made project** created for learning and experimentation.  
+All rights to *Bleach* belong to their respective owners.
+
+---
+
+## 👤 Author
+
+Built by **Swaroop Kumar**  
+Frontend Developer | React | Animation-focused UI
