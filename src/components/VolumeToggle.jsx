@@ -1,10 +1,14 @@
 import { Volume2, VolumeX } from "lucide-react";
-import { toggleMute, isMuted } from "../audio/audioManager";
+import {
+  toggleMute,
+  unlockAudio,
+  isMuted
+} from "../audio/audioManager";
 import { useSyncExternalStore } from "react";
 
 function subscribe(cb) {
-  window.addEventListener("audio-toggle", cb);
-  return () => window.removeEventListener("audio-toggle", cb);
+  window.addEventListener("audio-state", cb);
+  return () => window.removeEventListener("audio-state", cb);
 }
 
 function getSnapshot() {
@@ -15,9 +19,10 @@ export default function VolumeToggle() {
   const muted = useSyncExternalStore(subscribe, getSnapshot);
 
   const handleClick = (e) => {
-    e.stopPropagation(); // 🚫 prevent GSAP / UI interference
-    toggleMute();
-    window.dispatchEvent(new Event("audio-toggle"));
+    e.stopPropagation();       // prevents GSAP disturbance
+    unlockAudio();             // 🔑 browser unlock
+    toggleMute();              // mute / unmute only
+    window.dispatchEvent(new Event("audio-state"));
   };
 
   return (
